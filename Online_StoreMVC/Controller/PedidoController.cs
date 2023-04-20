@@ -1,6 +1,7 @@
 ﻿using Online_StoreMVC.Model;
 using Online_StoreMVC.View;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -74,6 +75,35 @@ namespace Online_StoreMVC.Controller
             PedidoController pedidoController = new PedidoController(datos);
             PedidoView pedidoView = new PedidoView(pedidoController);
             pedidoView.mostrarPedidoEnviado();
-        } 
+        }
+
+        //---------------------------------------------------------------------------------------------------------------------------
+
+        //métodos programa
+
+        public string getCliente(string email)
+        {
+            string nombre = datos.getNombreClienteByEmail(email);
+            return nombre;
+        }
+
+        public void añadirClientes2(Hashtable clienteHash)
+        {
+            datos.addCliente(clienteHash);
+        }
+
+        public string getArticulo(string codigo)
+        {
+            string descrip_Articulo = datos.getDescripcionArticulo(codigo);
+            return descrip_Articulo;
+        }
+
+        public int newPedido() //método para nuevo numero inscripción
+        {
+            int newInscripcion = datos.getNewNumPedido();  
+            return newInscripcion; 
+        }
+
+
     }
 }

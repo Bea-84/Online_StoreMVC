@@ -22,7 +22,7 @@ namespace Online_StoreMVC.View
             articuloController = particuloController;
         }
 
-        public void añadirArticulo()
+        public void añadirArticulo() 
         {
             Hashtable articuloHash=new Hashtable();
 
@@ -30,7 +30,7 @@ namespace Online_StoreMVC.View
             string codigo=Console.ReadLine();
 
             string descripcion = articuloController.getArticulo(codigo); 
-            if(!descripcion.Equals(""))
+            if(!descripcion.Equals("")) 
             {
                 Console.WriteLine("Artículo con la siguente descripción:"+"\t"+descripcion+"\t"+"ya existe");   
             }

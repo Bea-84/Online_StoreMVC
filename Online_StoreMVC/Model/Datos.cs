@@ -105,7 +105,13 @@ namespace Online_StoreMVC.Model
 
         //Pedidos
 
+        private static int numPedido = 1; //declaro variable
 
+        public int getNewNumPedido() //método genera numero pedido
+        {
+            numPedido++;
+            return numPedido;   
+        } 
 
 
     }
