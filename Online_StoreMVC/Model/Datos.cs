@@ -113,6 +113,50 @@ namespace Online_StoreMVC.Model
             return numPedido;   
         } 
 
+        public void addPedido(Hashtable pedidoHash) 
+        {
+            Pedido pedido = new Pedido();
+            pedido.Num_Pedido = (int)pedidoHash["Numero pedido"];
+            pedido.Unidad = (int)pedidoHash["Unidades"];
+            pedido.Fecha_Pedido = (DateTime)pedidoHash["Fecha"];
+
+            string email = (string)pedidoHash["Cliente"];
+            Cliente cliente = getClienteObjectByEmail(email);
+            pedido.Cliente=cliente;
+
+            string codigo = (string)pedidoHash["Articulo"];
+            Articulo articulo=getArticuloObjetoByCodigo(codigo);
+            pedido.Articulo=articulo;
+
+            pedidos.Add(pedido); 
+        }
+
+        public Cliente getClienteObjectByEmail(string email)
+        {
+            foreach(Cliente cliente in clientes)
+            {
+                if(cliente.Email.Equals(email))
+                {
+                    return cliente;
+                }
+            }
+            return null;
+            
+        }
+
+        public Articulo getArticuloObjetoByCodigo(string codigo)
+        {
+            foreach(Articulo articulo in articulos)
+            {
+                if(articulo.Codigo.Equals(codigo))
+                {
+                    return articulo;
+                }
+            }
+            return null;
+            
+        }
+
 
     }
 }

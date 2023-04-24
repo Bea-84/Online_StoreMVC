@@ -92,6 +92,11 @@ namespace Online_StoreMVC.Controller
             datos.addCliente(clienteHash);
         }
 
+        public void añadirPedido2(Hashtable pedidoHash)
+        {
+            datos.addPedido(pedidoHash);
+        }
+
         public string getArticulo(string codigo)
         {
             string descrip_Articulo = datos.getDescripcionArticulo(codigo);

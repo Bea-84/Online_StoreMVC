@@ -33,7 +33,8 @@ namespace Online_StoreMVC.View
             if (!nombre.Equals(""))
             {
                 Console.WriteLine("Cliente ya registrado un saludo" + "\t" + nombre);
-                Console.WriteLine("Por favor introduzca el código de el artículo");
+                Console.WriteLine("A continuación puede comenzar con su pedido");
+                Console.WriteLine("Por favor introduzca el código de un artículo"); 
                 string codigo = Console.ReadLine();
 
                 string descripcion = pedidoController.getArticulo(codigo);
@@ -44,18 +45,27 @@ namespace Online_StoreMVC.View
                     Console.WriteLine("Su número de pedido es:" + "\t" + numPedido + "\t" + "recuérdelo para posteriores consultas");
                     Console.WriteLine("Selecciona cuántas unidades quieres del articulo");
                     int unidades=int.Parse(Console.ReadLine());
-                    Console.WriteLine("Introduzca la fecha");
+                    Console.WriteLine("Para finalizar introduzca la fecha del dia de hoy");
                     DateTime fecha=DateTime.Parse(Console.ReadLine());
+
+                    pedidoHash.Add("Numero pedido", numPedido);
+                    pedidoHash.Add("Unidades", unidades);
+                    pedidoHash.Add("Fecha", fecha);
+                    pedidoHash.Add("Cliente", email);
+                    pedidoHash.Add("Articulo", codigo);
+
+                    pedidoController.añadirPedido2(pedidoHash); 
                 }
                 else
                 {
-                    Console.WriteLine("Articulo inexistente");
+                    Console.WriteLine("No puede hacer pedido de un artículo inexistente");
                 }
             }
             else
             {
 
                 Hashtable clienteHash=new Hashtable();
+                Console.WriteLine("Siga los siguientes pasos para darse de alta en OnlineStore");
                 Console.WriteLine("Indique tu nombre");
                 string nombreCliente = Console.ReadLine();
                 Console.WriteLine("Indique su dirección");
@@ -65,24 +75,40 @@ namespace Online_StoreMVC.View
                 Console.WriteLine("Bienvenido a Online Store");
 
 
-                clienteHash.Add("Nombre", nombreCliente);
+                clienteHash.Add("Nombre", nombreCliente); 
                 clienteHash.Add("Direccion", direccion);
                 clienteHash.Add("Nif", nif);
                 clienteHash.Add("Email", email);
 
                 pedidoController.añadirClientes2(clienteHash);
 
-                Console.WriteLine("Por favor introduzca el código de el artículo");
+                Console.WriteLine("A continuación puede comenzar con su pedido");
+                Console.WriteLine("Por favor introduzca el código de un artículo"); 
                 string codigo = Console.ReadLine();
 
                 string descripcion = pedidoController.getArticulo(codigo);
                 if (!descripcion.Equals(""))
                 {
                     Console.WriteLine("Artículo con la siguente descripción:" + "\t" + descripcion + "\t" + "ya existe");
+                    int numPedido = pedidoController.newPedido();
+                    Console.WriteLine("Su número de pedido es:" + "\t" + numPedido + "\t" + "recuérdelo para posteriores consultas");
+                    Console.WriteLine("Selecciona cuántas unidades quieres del articulo");
+                    int unidades = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Para finalizar introduzca la fecha del dia de hoy");
+                    DateTime fecha = DateTime.Parse(Console.ReadLine());
+
+                    pedidoHash.Add("Numero pedido",numPedido);
+                    pedidoHash.Add("Unidades", unidades);
+                    pedidoHash.Add("Fecha", fecha);
+                    pedidoHash.Add("Cliente",email);
+                    pedidoHash.Add("Articulo", codigo);
+
+                    pedidoController.añadirPedido2(pedidoHash);
+
                 }
                 else
                 {
-                    Console.WriteLine("Articulo inexistente"); 
+                    Console.WriteLine("No puede hacer pedido de un artículo inexistente"); 
                 }
             }
 
