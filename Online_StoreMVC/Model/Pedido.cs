@@ -14,7 +14,7 @@ namespace Online_StoreMVC.Model
         private Cliente cliente;
         private Articulo articulo;
 
-        public int Num_Pedido { get => num_Pedido; set => num_Pedido = value; }
+        public int Num_Pedido { get => num_Pedido; set => num_Pedido = value; } 
         public int Unidad { get => unidad; set => unidad = value; }
         public DateTime Fecha_Pedido { get => fecha_Pedido; set => fecha_Pedido = value; }
         internal Cliente Cliente { get => cliente; set => cliente = value; }
@@ -22,7 +22,7 @@ namespace Online_StoreMVC.Model
 
         public override string ToString()
         {
-            return num_Pedido+"\t"+unidad+"\t"+fecha_Pedido+"\t"+cliente+articulo; 
+            return num_Pedido+"\t"+unidad+"\t"+fecha_Pedido+"\t"+cliente+"\t"+articulo; 
         }
     }
 }

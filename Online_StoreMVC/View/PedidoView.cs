@@ -10,7 +10,7 @@ namespace Online_StoreMVC.View
 {
     internal class PedidoView
     {
-        PedidoController pedidoController;
+        PedidoController pedidoController; 
 
         public PedidoView()
         {
@@ -65,7 +65,7 @@ namespace Online_StoreMVC.View
             {
 
                 Hashtable clienteHash=new Hashtable();
-                Console.WriteLine("Siga los siguientes pasos para darse de alta en OnlineStore");
+                Console.WriteLine("Siga los siguientes pasos para darse de alta en Online Store"); 
                 Console.WriteLine("Indique tu nombre");
                 string nombreCliente = Console.ReadLine();
                 Console.WriteLine("Indique su dirección");
@@ -124,12 +124,43 @@ namespace Online_StoreMVC.View
 
         public void mostrarPedidoPendienteEnvio()
         {
+            Console.WriteLine("Introduce tu email");
+            string email = Console.ReadLine();
 
+            string nombre = pedidoController.getCliente(email);
+            if (!nombre.Equals(""))
+            {
+                Console.WriteLine("Cliente ya registrado un saludo" + "\t" + nombre);
+                Console.WriteLine("Introduce tu numero de pedido por favor");
+                int numPedido = int.Parse(Console.ReadLine());
+
+                List<int> listaPedidos = pedidoController.getPedido(numPedido);  
+            }
+            else
+            {
+                Console.WriteLine("Cliente inexistente");
+            }
         }
 
         public void mostrarPedidoEnviado()
         {
+            Console.WriteLine("Introduce tu email");
+            string email = Console.ReadLine();
 
+            string nombre = pedidoController.getCliente(email);
+            if (!nombre.Equals(""))
+            {
+                Console.WriteLine("Cliente ya registrado un saludo" + "\t" + nombre);
+                Console.WriteLine("Introduce tu numero de pedido por favor");
+                int numPedido = int.Parse(Console.ReadLine());
+
+                List<int> listaPedidos = pedidoController.getPedido2(numPedido); 
+
+            }
+            else
+            {
+                Console.WriteLine("Cliente inexistente");
+            }
         }
     }
 }

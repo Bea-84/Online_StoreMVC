@@ -36,14 +36,15 @@ namespace Online_StoreMVC.View
             }
             else
             {
+                Console.WriteLine("A continuación procederemos a crear un artículo");
                 Console.WriteLine("Indique la descripción del artículo");
                 descripcion=Console.ReadLine();
                 Console.WriteLine("Indique precio artículo");
                 double precio=double.Parse(Console.ReadLine());
                 Console.WriteLine("Introduzca los gastos de envio");
                 double gastos=double.Parse(Console.ReadLine());   
-                Console.WriteLine("Indique tiempo de preparación");
-                string tiempo=Console.ReadLine();
+                Console.WriteLine("Indique fecha en la que estará en pedido");
+                DateTime tiempo=DateTime.Parse(Console.ReadLine()); 
 
                 articuloHash.Add("Codigo",codigo);
                 articuloHash.Add("Descripcion", descripcion);
@@ -66,7 +67,7 @@ namespace Online_StoreMVC.View
 
                 List<string> listaArticulos = articuloController.getArticulo2(codigo);
 
-                Console.WriteLine("Código artículo\tDescripción artículo\tPrecio artículo\tGastos de envío\tTiempo de preparación");
+                Console.WriteLine("Código artículo\tDescripción artículo\tPrecio artículo\tGastos de envío\tFecha de entrega");
                 Console.WriteLine("==============================================================================================");
                 foreach(string articuloString in listaArticulos)
                 {

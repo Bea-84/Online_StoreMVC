@@ -12,17 +12,17 @@ namespace Online_StoreMVC.Model
         private string descripcion;
         private double precio;
         private double gastos_envio;
-        private string tiempo_preparacion;
+        private DateTime tiempo_preparacion; 
 
         public string Codigo { get => codigo; set => codigo = value; }
         public string Descripcion { get => descripcion; set => descripcion = value; }
         public double Precio { get => precio; set => precio = value; }
         public double Gastos_envio { get => gastos_envio; set => gastos_envio = value; }
-        public string Tiempo_preparacion { get => tiempo_preparacion; set => tiempo_preparacion = value; }
+        public DateTime Tiempo_preparacion { get => tiempo_preparacion; set => tiempo_preparacion = value; }
 
         public override string ToString()
         {
-            return codigo+"\t"+descripcion+"\t"+precio+"\t"+gastos_envio+"\t"+tiempo_preparacion; 
+            return codigo+"\t"+descripcion+"\t"+precio+"\t"+gastos_envio+"\t"+tiempo_preparacion;  
         }
 
     }

@@ -109,6 +109,16 @@ namespace Online_StoreMVC.Controller
             return newInscripcion; 
         }
 
+        public List<int> getPedido(int numPedido) //método mostrar pedido pendiente de envío
+        {
+            return datos.getPedidoByNum(numPedido);
+        }
+
+        public List<int> getPedido2(int numPedido) //método mostrar pedido enviado
+        {
+            return datos.getPedidoByNum2(numPedido);
+        }
+ 
 
     }
 }

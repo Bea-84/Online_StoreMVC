@@ -36,13 +36,14 @@ namespace Online_StoreMVC.View
             }
             else
             {
+                Console.WriteLine("Siga los siguientes pasos para darse de alta en Online Store"); 
                 Console.WriteLine("Indique tu nombre");
                 string nombreCliente=Console.ReadLine();
                 Console.WriteLine("Indique su dirección");
                 string direccion=Console.ReadLine();
                 Console.WriteLine("Indique tu nif");
                 int nif=int.Parse(Console.ReadLine());
-                Console.WriteLine("Bienvenido a Online Store");
+                Console.WriteLine("Bienvenido a Online Store"); 
                
 
                 clienteHash.Add("Nombre",nombreCliente);
@@ -63,7 +64,7 @@ namespace Online_StoreMVC.View
             string nombre = clienteController.getCliente(email);
             if (!nombre.Equals(""))
             {
-                List<string> listaClientes = clienteController.getCliente2(email);
+                List<string> listaClientes = clienteController.getCliente2(email); 
 
                 Console.WriteLine("Nombre cliente\tDomicilio cliente\tNif cliente\tEmail cliente");
                 Console.WriteLine("=============================================================");
