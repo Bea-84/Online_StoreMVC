@@ -32,7 +32,7 @@ namespace Online_StoreMVC.View
             string nombre = pedidoController.getCliente(email);
             if (!nombre.Equals(""))
             {
-                Console.WriteLine("Cliente ya registrado un saludo" + "\t" + nombre);
+                Console.WriteLine("Cliente ya registrado un saludo" + "\t" + nombre); 
                 Console.WriteLine("A continuación puede comenzar con su pedido");
                 Console.WriteLine("Por favor introduzca el código de un artículo"); 
                 string codigo = Console.ReadLine();
@@ -110,19 +110,10 @@ namespace Online_StoreMVC.View
                 {
                     Console.WriteLine("No puede hacer pedido de un artículo inexistente"); 
                 }
-            }
-
-
-
-
+            } 
         }
 
         public void eliminarPedido()
-        {
-
-        }
-
-        public void mostrarPedidoPendienteEnvio()
         {
             Console.WriteLine("Introduce tu email");
             string email = Console.ReadLine();
@@ -131,10 +122,40 @@ namespace Online_StoreMVC.View
             if (!nombre.Equals(""))
             {
                 Console.WriteLine("Cliente ya registrado un saludo" + "\t" + nombre);
-                Console.WriteLine("Introduce tu numero de pedido por favor");
+                Console.WriteLine("Introduce tu número de pedido por favor");
+                int numPedido = int.Parse(Console.ReadLine());
+                Console.WriteLine("¿Seguro que deseas eliminar pedido?(s/n)");
+                string ok=Console.ReadLine();
+                if(ok.ToUpper().Equals("S"))
+                {
+                    pedidoController.eliminarPedido2(numPedido);
+                }
+                else
+                {
+                    Console.WriteLine("Gracias por confiar en nosotros"); 
+                }
+                 
+            }
+            else
+            {
+                Console.WriteLine("Cliente inexistente");
+            }
+        }
+
+        public void mostrarPedidoPendienteEnvio() 
+        {
+            Console.WriteLine("Introduce tu email");
+            string email = Console.ReadLine();
+
+            string nombre = pedidoController.getCliente(email);
+            if (!nombre.Equals(""))
+            {
+                Console.WriteLine("Cliente ya registrado un saludo" + "\t" + nombre);
+                Console.WriteLine("Introduce tu número de pedido por favor");
                 int numPedido = int.Parse(Console.ReadLine());
 
-                List<int> listaPedidos = pedidoController.getPedido(numPedido);  
+                List<int> listaPedidos = pedidoController.getPedido(numPedido); 
+
             }
             else
             {
@@ -151,7 +172,7 @@ namespace Online_StoreMVC.View
             if (!nombre.Equals(""))
             {
                 Console.WriteLine("Cliente ya registrado un saludo" + "\t" + nombre);
-                Console.WriteLine("Introduce tu numero de pedido por favor");
+                Console.WriteLine("Introduce tu número de pedido por favor");
                 int numPedido = int.Parse(Console.ReadLine());
 
                 List<int> listaPedidos = pedidoController.getPedido2(numPedido); 
@@ -162,5 +183,5 @@ namespace Online_StoreMVC.View
                 Console.WriteLine("Cliente inexistente");
             }
         }
-    }
+    } 
 }

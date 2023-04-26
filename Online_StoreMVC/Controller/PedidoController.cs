@@ -94,7 +94,7 @@ namespace Online_StoreMVC.Controller
 
         public void añadirPedido2(Hashtable pedidoHash)
         {
-            datos.addPedido(pedidoHash);
+            datos.addPedido(pedidoHash); 
         }
 
         public string getArticulo(string codigo)
@@ -118,6 +118,13 @@ namespace Online_StoreMVC.Controller
         {
             return datos.getPedidoByNum2(numPedido);
         }
+
+        public void eliminarPedido2(int numPedido)
+        {
+            datos.eliminarPedido(numPedido);
+        }
+
+      
  
 
     }

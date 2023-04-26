@@ -25,14 +25,14 @@ namespace Online_StoreMVC.Model
 
         public string getDescripcionArticulo(string codigo)
         {
-            foreach(Articulo articulo in articulos)
+            foreach (Articulo articulo in articulos)
             {
-                if(articulo.Codigo.Equals(codigo))
+                if (articulo.Codigo.Equals(codigo))
                 {
                     return articulo.Descripcion;
                 }
             }
-            return "";  
+            return "";
         }
 
         public void addArticulo(Hashtable articuloHash)
@@ -42,24 +42,24 @@ namespace Online_StoreMVC.Model
             articulo.Descripcion = (string)articuloHash["Descripcion"];
             articulo.Precio = (double)articuloHash["Precio"];
             articulo.Gastos_envio = (double)articuloHash["Gastos"];
-            articulo.Tiempo_preparacion = (DateTime)articuloHash["Tiempo"]; 
+            articulo.Tiempo_preparacion = (DateTime)articuloHash["Tiempo"];
 
-            articulos.Add(articulo);    
+            articulos.Add(articulo);
         }
 
-        public List<string>getArticuloByCodigo(string codigo)
+        public List<string> getArticuloByCodigo(string codigo)
         {
             List<string> listaArticulos = new List<string>();
-            
-            foreach(Articulo articulo in articulos)
+
+            foreach (Articulo articulo in articulos)
             {
-                if(articulo.Codigo.Equals(codigo))
+                if (articulo.Codigo.Equals(codigo))
                 {
                     listaArticulos.Add(articulo.ToString());
                 }
             }
-            return listaArticulos; 
-        } 
+            return listaArticulos;
+        }
 
         //------------------------------------------------------------------------------------------------------------------------------
 
@@ -67,13 +67,14 @@ namespace Online_StoreMVC.Model
 
         public string getNombreClienteByEmail(string email)
         {
-            foreach(Cliente cliente in clientes)
+            foreach (Cliente cliente in clientes)
             {
-                if(cliente.Email.Equals(email))
+                if (cliente.Email.Equals(email))
                 {
                     return cliente.Nombre;
                 }
-            }return ""; 
+            }
+            return "";
         }
 
         public void addCliente(Hashtable clienteHash)
@@ -91,14 +92,14 @@ namespace Online_StoreMVC.Model
         {
             List<string> listaClientes = new List<string>();
 
-            foreach(Cliente cliente in clientes)
+            foreach (Cliente cliente in clientes)
             {
-                if(cliente.Email.Equals(email))
+                if (cliente.Email.Equals(email))
                 {
                     listaClientes.Add(cliente.ToString());
                 }
             }
-            return listaClientes; 
+            return listaClientes;
         }
 
         //----------------------------------------------------------------------------------------------------------------------------------
@@ -110,10 +111,10 @@ namespace Online_StoreMVC.Model
         public int getNewNumPedido() //método genera numero pedido
         {
             numPedido++;
-            return numPedido;   
-        } 
+            return numPedido;
+        }
 
-        public void addPedido(Hashtable pedidoHash) 
+        public void addPedido(Hashtable pedidoHash)
         {
             Pedido pedido = new Pedido();
             pedido.Num_Pedido = (int)pedidoHash["Numero pedido"];
@@ -122,87 +123,116 @@ namespace Online_StoreMVC.Model
 
             string email = (string)pedidoHash["Cliente"];
             Cliente cliente = getClienteObjectByEmail(email);
-            pedido.Cliente=cliente;
+            pedido.Cliente = cliente;
 
             string codigo = (string)pedidoHash["Articulo"];
-            Articulo articulo=getArticuloObjetoByCodigo(codigo);
-            pedido.Articulo=articulo;
+            Articulo articulo = getArticuloObjetoByCodigo(codigo);
+            pedido.Articulo = articulo;
 
-            pedidos.Add(pedido); 
+            pedidos.Add(pedido);
         }
 
         public Cliente getClienteObjectByEmail(string email)
         {
-            foreach(Cliente cliente in clientes)
+            foreach (Cliente cliente in clientes)
             {
-                if(cliente.Email.Equals(email))
+                if (cliente.Email.Equals(email))
                 {
                     return cliente;
                 }
             }
             return null;
-            
+
         }
 
         public Articulo getArticuloObjetoByCodigo(string codigo)
         {
-            foreach(Articulo articulo in articulos)
+            foreach (Articulo articulo in articulos)
             {
-                if(articulo.Codigo.Equals(codigo))
+                if (articulo.Codigo.Equals(codigo))
                 {
                     return articulo;
                 }
             }
             return null;
-            
+
         }
 
         public List<int> getPedidoByNum(int numPedido) //método pedido pendiente de envío
         {
-            List<int> listaPedidos = new List<int>(); 
-
-            foreach(Pedido pedido in pedidos)
-            {
-                if(pedido.Num_Pedido.Equals(numPedido)&&(pedido.Fecha_Pedido < pedido.Articulo.Tiempo_preparacion))  
-                {
-                    Console.ForegroundColor = ConsoleColor.Green; 
-                    Console.WriteLine("A continuación se mostrarán los datos de los envíos pendientes");
-                    Console.WriteLine("Número pedido\tNúmero artículo\tFecha pedido\tDatos cliente\tDatos artículo\tFecha de entrega");
-                    Console.WriteLine("============================================================================================="); 
-                    Console.ForegroundColor= ConsoleColor.Gray;
-                    Console.WriteLine(pedido);
-                }
-                else
-                {
-                    Console.WriteLine("No existen pedidos pendientes de envío");  
-                }
-            }
-            return listaPedidos; 
-        }
-
-        public List<int> getPedidoByNum2(int numPedido) //método pedido enviado 
-        {
+            bool existeAlgunPedido = false;
             List<int> listaPedidos = new List<int>();
+        
 
             foreach (Pedido pedido in pedidos)
             {
-                if (pedido.Num_Pedido.Equals(numPedido) && (pedido.Fecha_Pedido > pedido.Articulo.Tiempo_preparacion)) 
+                if (pedido.Num_Pedido.Equals(numPedido) && pedido.Fecha_Pedido < pedido.Articulo.Tiempo_preparacion)
                 {
+                    existeAlgunPedido = true;
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("A continuación se mostrarán los datos de los envíos pendientes");
+                    Console.WriteLine("Número pedido\tNúmero artículo\tFecha pedido\tDatos cliente\tDatos artículo\tFecha de entrega");
+                    Console.WriteLine("=============================================================================================");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+
+                    Console.WriteLine(pedido);
+                }
+            }
+            if (!existeAlgunPedido)
+            {
+                Console.WriteLine("No existen pedidos pendientes de envío");
+            }
+            return listaPedidos;
+
+        }
+        public List<int> getPedidoByNum2(int numPedido) //método pedido enviado  
+        {
+            bool existeAlgunPedido = false;
+            List<int> listaPedidos = new List<int>();
+          
+
+            foreach (Pedido pedido in pedidos)
+            {
+                if (pedido.Num_Pedido.Equals(numPedido) && pedido.Fecha_Pedido > pedido.Articulo.Tiempo_preparacion)
+                {
+                    existeAlgunPedido = true;
+
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("A continuación se mostrarán los datos de los pedidos ya enviados");
                     Console.WriteLine("Número pedido\tNúmero artículo\tFecha pedido\tDatos cliente\tDatos artículo\tFecha en que fué entregado");
                     Console.WriteLine("=======================================================================================================");
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine(pedido);  
+
+                    Console.WriteLine(pedido);
                 }
-                else
-                {
-                    Console.WriteLine("No se han encontrado coincidencias");
-                }
+            }
+            if (!existeAlgunPedido)
+            {
+                Console.WriteLine("No existen coincidencias");  
             }
             return listaPedidos; 
         }
 
+        public void eliminarPedido(int numPedido)
+        {
+            bool existeAlgunPedido = false;
 
-    }
+            foreach (Pedido pedido in pedidos) 
+            {
+                if(pedido.Num_Pedido.Equals(numPedido) && pedido.Fecha_Pedido > pedido.Articulo.Tiempo_preparacion)
+                {
+                    existeAlgunPedido = true; 
+                    pedidos.Remove(pedido);
+                    Console.WriteLine("Pedido eliminado"); 
+                    return; 
+                } 
+            }
+            if (!existeAlgunPedido)
+            {
+                Console.WriteLine("El pedido no se puede eliminar,ya que está de camino");  
+            }
+        }
+
+    } 
 }
